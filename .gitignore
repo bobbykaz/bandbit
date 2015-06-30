@@ -1,0 +1,6 @@
+packages/*
+*/obj/*
+*/bin/*
+*.suo
+FitBand.Developer.Secrets/*
+
