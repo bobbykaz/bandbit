@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Fitbit.API.Client
 {
-    public class FitbitClient : BaseClient
+    public partial class FitbitClient : BaseClient
     {
         private string ClientID { get; set; }
         private string ClientSecret { get; set; }

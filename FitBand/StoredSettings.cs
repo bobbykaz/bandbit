@@ -12,14 +12,20 @@ namespace FitBand
     {
         public static ApplicationDataContainer _AppSettings;
 
-        private const string AppSettingsKey = "AppSettings";
-        private const string RefreshTokenKey = "RefreshToken";
+        public enum StoredStringValues
+        { 
+            AppSettings,
+            RefreshToken,
+            ImplicitAccessToken
+        }
 
-        public static async Task<string> TryLoadRefreshToken()
+        public static async Task<string> TryLoad(StoredStringValues desiredKey)
         {
+            string key = Enum.GetName(typeof(StoredStringValues), desiredKey);
+
             try
             {
-                return await LoadString(RefreshTokenKey);
+                return await LoadString(key);
             }
             catch(FileNotFoundException)
             {
@@ -27,14 +33,16 @@ namespace FitBand
             }
         }
 
-        public static async Task SaveRefreshToken(string token)
+        public static async Task Save(StoredStringValues desiredKey, string value)
         {
-            await SaveString(RefreshTokenKey, token);
+            string key = Enum.GetName(typeof(StoredStringValues), desiredKey);
+            await SaveString(key, value);
         }
 
-        public static async Task DeleteRefreshToken()
+        public static async Task Delete(StoredStringValues desiredKey)
         {
-            await DeleteString(RefreshTokenKey);
+            string key = Enum.GetName(typeof(StoredStringValues), desiredKey);
+            await DeleteString(key);
         }
 
         private static async Task SaveString(string Key, string content)

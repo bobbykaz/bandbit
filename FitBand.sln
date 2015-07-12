@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitbit.API.Client", "Fitbit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitBand.Developer.Secrets", "FitBand.Developer.Secrets\FitBand.Developer.Secrets.csproj", "{B514B206-DA99-4394-85D8-30C50F54725E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitband.ConsoleTest", "Fitband.Console\Fitband.ConsoleTest.csproj", "{4C0D9232-CF61-4138-B0C3-E2228618B5DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitband.Console", "Fitband.Console\Fitband.Console.csproj", "{4C0D9232-CF61-4138-B0C3-E2228618B5DB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3D77C4B-563B-401F-A1F1-BE740672B446}"
 	ProjectSection(SolutionItems) = preProject

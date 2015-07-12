@@ -13,11 +13,13 @@ namespace Fitband.ConsoleTest
         static void Main(string[] args)
         {
             Fitbit.API.Client.FitbitClient client = new Fitbit.API.Client.FitbitClient(Secrets.ClientID, Secrets.ClientConsumerSecret, Secrets.CallbackURI);
-            //var token = client.Authenticate(code, Secrets.CallbackURI).ConfigureAwait(false).GetAwaiter().GetResult();
-            var token = client.Authenticate(Secrets.TestRefreshToken).ConfigureAwait(false).GetAwaiter().GetResult();
+            client.SetBearerAuthorizationHeader(Secrets.TestAccessToken);
+
+            DateTime sampleDay = new DateTime(2015, 6, 30);
+            var activites = client.GetActivities(sampleDay).ConfigureAwait(false).GetAwaiter().GetResult();
+
 
             Console.WriteLine("Done");
-
         }
     }
 }

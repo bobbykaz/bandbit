@@ -36,11 +36,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Activities\GetActivitiesResponse.cs" />
     <Compile Include="AuthToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Activities\" />
     <Folder Include="Foods\" />
     <Folder Include="Profile\" />
   </ItemGroup>
