@@ -37,8 +37,7 @@ namespace Fitbit.API.Model.Activities
 
     public class GetActivitiesResponse
     {
-        List<Activity> Activities { get; set; }
-        Goals goals { get; set; }
-        public string summary { get; set; }
+        public List<Activity> activities { get; set; }
+        public Goals goals { get; set; }
     }
 }

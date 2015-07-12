@@ -97,6 +97,8 @@ namespace FitBand
                 else if(FragmentContainsAccessToken(args.Uri.Fragment)) //implicit oauth returns info in fragment and not query
                 {
                     var token = await CheckImplicitResult(args.Uri.Fragment);
+                    Client.SetBearerAuthorizationHeader(token);
+                    var activities = await Client.GetActivities(new DateTime(2015, 6, 30));
                 }
             }
         }

@@ -101,7 +101,7 @@ namespace Fitbit.API.Client
 
         public void SetBearerAuthorizationHeader(string bearerToken)
         {
-            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", bearerToken);
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
         }
     }
 
