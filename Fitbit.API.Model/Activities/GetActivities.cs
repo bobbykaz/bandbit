@@ -9,7 +9,7 @@ namespace Fitbit.API.Model.Activities
     public class Activity
     {
         public int activityId { get; set; }
-        public int activityPArentId { get; set; }
+        public int activityParentId { get; set; }
         public int calories { get; set; }
         public double distance { get; set; }
         public string description { get; set; }

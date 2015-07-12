@@ -36,7 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Activities\GetActivitiesResponse.cs" />
+    <Compile Include="Activities\GetActivities.cs" />
+    <Compile Include="Activities\PostActivity.cs" />
     <Compile Include="AuthToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
