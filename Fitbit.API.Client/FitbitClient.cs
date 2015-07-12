@@ -58,20 +58,38 @@ namespace Fitbit.API.Client
             }
         }
 
-        public async Task<AuthTokenResponse> RefreshAuthToken(string refreshToken)
+        public async Task<AuthTokenResponse> Authenticate(string refreshToken)
         {
             string query = "oauth2/token";
-            RefreshTokenAuthRequest request = new RefreshTokenAuthRequest()
-            {
-                refresh_token = refreshToken
-            };
+            Dictionary<string, string> authFlow = new Dictionary<string, string>();
+            authFlow["grant_type"] = "refresh_token";
+            authFlow["refresh_token"] = refreshToken;
 
             SetBasicAuthorizationHeader();
 
-            var token = await PostAsync<RefreshTokenAuthRequest, AuthTokenResponse>(query, request);
+            try
+            {
+                HttpContent content = new FormUrlEncodedContent(authFlow);
+                content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
-            SetBearerAuthorizationHeader(token.access_token);
-            return token;
+                var response = await Client.PostAsync(query, content).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+
+                if (response.Content != null)
+                {
+                    string resultJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    AuthTokenResponse result = JsonConvert.DeserializeObject<AuthTokenResponse>(resultJson);
+                    SetBearerAuthorizationHeader(result.access_token);
+                    return result;
+                }
+                else
+                    throw new Exception(string.Format("No content for PostAsync {0}", query));
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public void SetBasicAuthorizationHeader()
