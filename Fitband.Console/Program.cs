@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FitBand.Developer.Secrets;
 using System.IO;
+using Fitbit.API.Model.Activities;
 
 namespace Fitband.ConsoleTest
 {
@@ -21,10 +22,19 @@ namespace Fitband.ConsoleTest
 
             var walkActivity = availableActivities.categories.Where(c => c.name == "Walking").FirstOrDefault();
             int targetId = walkActivity.id;
-            if (walkActivity.activities.Any())
-                targetId = walkActivity.activities.FirstOrDefault().activityId;
 
-            var myActivites = client.GetUserActivityRecords(sampleDay).ConfigureAwait(false).GetAwaiter().GetResult();
+            PostActivityRequest newAct = new PostActivityRequest()
+            {
+                activityId = 17151,//90013,
+                distance = 100,
+                distanceUnit = PostActivityRequest.DistanceUnit.Steps,
+                durationMillis = 120000,
+                startTime = DateTime.Now
+            };
+
+            var newAccLog = client.CreateActivityLog(newAct).ConfigureAwait(false).GetAwaiter().GetResult();
+
+            var myActivites = client.GetUserActivityLogs(sampleDay).ConfigureAwait(false).GetAwaiter().GetResult();
 
             var user = client.GetUser().ConfigureAwait(false).GetAwaiter().GetResult();
 

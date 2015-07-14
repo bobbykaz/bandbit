@@ -25,6 +25,16 @@ namespace Fitbit.API.Model.Activities
 
     public class Activity
     {
+        public int id { get; set; }
+        public int activityParentId { get; set; }
+        public bool hasSpeed { get; set; }
+        public List<ActivityLevel> activityLevels { get; set; }
+        public string name { get; set; }
+        public int steps { get; set; }
+    }
+
+    public class ActivityLog
+    {
         public int activityId { get; set; }
         public int activityParentId { get; set; }
         public int calories { get; set; }
@@ -60,9 +70,9 @@ namespace Fitbit.API.Model.Activities
 
     }
 
-    public class GetUserActivityRecordsResponse
+    public class GetUserActivityLogsResponse
     {
-        public List<Activity> activities { get; set; }
+        public List<ActivityLog> activities { get; set; }
         public Goals goals { get; set; }
     }
 }

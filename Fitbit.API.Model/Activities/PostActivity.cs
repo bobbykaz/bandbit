@@ -10,9 +10,9 @@ namespace Fitbit.API.Model.Activities
 {
     public class PostActivityRequest
     {
-        public int activityId { get; set; }
+        public int? activityId { get; set; }
         public string activityName { get; set; }
-        public int manualCalories { get; set; }
+        public int? manualCalories { get; set; }
 
         [JsonIgnore]
         public DateTime startTime { get; set; }
@@ -31,6 +31,22 @@ namespace Fitbit.API.Model.Activities
                 return hh + ":" + mm;
             } 
         }
+        [JsonProperty("date")]
+        public string date {
+            get 
+            {
+                string yr = startTime.Year.ToString();
+                string mnth = startTime.Month.ToString();
+                if (startTime.Month < 10)
+                    mnth = "0" + mnth;
+
+                string day = startTime.Day.ToString();
+                if (startTime.Day < 10)
+                    day = "0" + day;
+
+                return yr + "-" + mnth + "-" + day;
+            }
+        }
 
         public int durationMillis { get; set; }
 
@@ -40,7 +56,7 @@ namespace Fitbit.API.Model.Activities
         public string distanceString {
             get
             {
-                return string.Format("{0:C}", distance);
+                return string.Format("{0:0.00}", distance);
             }
         }
 

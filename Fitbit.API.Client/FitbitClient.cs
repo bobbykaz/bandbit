@@ -155,11 +155,34 @@ namespace Fitbit.API.Client
             }
         }
 
+        protected async Task<TResult> PostAsync<TResult>(string query)
+        {
+            try
+            {
+                var response = await Client.PostAsync(query, new StringContent("") ).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+
+                if (response.Content != null)
+                {
+                    string resultJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    TResult result = JsonConvert.DeserializeObject<TResult>(resultJson);
+                    return result;
+                }
+                else
+                    throw new Exception(string.Format("No content for PostAsync {0}", query));
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         protected async Task<TResult> PostAsync<TRequest, TResult>(string query, TRequest request)
         {
             try
             {
-                string json = JsonConvert.SerializeObject(request);
+                string json = JsonConvert.SerializeObject(request, new JsonSerializerSettings() {  NullValueHandling = NullValueHandling.Ignore });
                 HttpContent content = new StringContent(json);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
