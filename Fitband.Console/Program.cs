@@ -16,7 +16,15 @@ namespace Fitband.ConsoleTest
             client.SetBearerAuthorizationHeader(Secrets.TestAccessToken);
 
             DateTime sampleDay = new DateTime(2015, 6, 30);
-            var activites = client.GetActivities(sampleDay).ConfigureAwait(false).GetAwaiter().GetResult();
+
+            var availableActivities = client.GetAvailableActivities().ConfigureAwait(false).GetAwaiter().GetResult();
+
+            var walkActivity = availableActivities.categories.Where(c => c.name == "Walking").FirstOrDefault();
+            int targetId = walkActivity.id;
+            if (walkActivity.activities.Any())
+                targetId = walkActivity.activities.FirstOrDefault().activityId;
+
+            var myActivites = client.GetUserActivityRecords(sampleDay).ConfigureAwait(false).GetAwaiter().GetResult();
 
             var user = client.GetUser().ConfigureAwait(false).GetAwaiter().GetResult();
 

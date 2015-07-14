@@ -98,7 +98,7 @@ namespace FitBand
                 {
                     var token = await CheckImplicitResult(args.Uri.Fragment);
                     Client.SetBearerAuthorizationHeader(token);
-                    var activities = await Client.GetActivities(new DateTime(2015, 6, 30));
+                    var activities = await Client.GetUserActivityRecords(new DateTime(2015, 6, 30));
                 }
             }
         }

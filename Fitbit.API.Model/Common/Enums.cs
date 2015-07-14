@@ -83,3 +83,12 @@ namespace Fitbit.API.Model.Common.Enums.UnitSystems
         mmol_l
     }
 }
+
+namespace Fitbit.API.Model.Common.Enums.Activities
+{
+    public enum AccessLevel
+    { 
+        PUBLIC,
+        PRIVATE
+    }
+}
