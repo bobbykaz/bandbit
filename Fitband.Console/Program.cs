@@ -18,6 +18,8 @@ namespace Fitband.ConsoleTest
             DateTime sampleDay = new DateTime(2015, 6, 30);
             var activites = client.GetActivities(sampleDay).ConfigureAwait(false).GetAwaiter().GetResult();
 
+            var user = client.GetUser().ConfigureAwait(false).GetAwaiter().GetResult();
+
 
             Console.WriteLine("Done");
         }
