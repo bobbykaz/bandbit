@@ -25,27 +25,29 @@ namespace Fitbit.API.Client
             return await GetAsync<GetUserActivityLogsResponse>(query);
         }
 
-        public async Task<ActivityLog> CreateActivityLog(PostActivityRequest createRequest)
+        public async Task<PostActivityResponse> CreateActivityLog(PostActivityRequest createRequest)
         {
             string query = "1/user/-/activities.json?";
 
-            string json = JsonConvert.SerializeObject(createRequest, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
-            Dictionary<string, string> dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            string queryParameters = SerializeToQueryString<PostActivityRequest>(createRequest);
 
-            bool first = true;
-            foreach(string key in dict.Keys)
-            {
-                if (!first)
-                    query += "&";
-
-                query += key + "=" + dict[key];
-                
-                first = false;
-            }
-
-            return await PostAsync<ActivityLog>(query);
+            return await PostAsync<PostActivityResponse>(query + queryParameters);
         }
 
+        public async Task<PostActivityResponse> UpdateActivityLog(int activityLogId, PostActivityRequest createRequest)
+        {
+            string query = string.Format("1/user/-/activities/{0}.json?", activityLogId);
 
+            string queryParameters = SerializeToQueryString<PostActivityRequest>(createRequest);
+
+            return await PostAsync<PostActivityResponse>(query + queryParameters);
+        }
+
+        public async Task DeleteActivityLog(int activityLogId)
+        {
+            string query = string.Format("1/user/-/activities/{0}.json?", activityLogId);
+
+            await DeleteAsync(query);
+        }
     }
 }

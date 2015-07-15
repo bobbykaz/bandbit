@@ -91,4 +91,11 @@ namespace Fitbit.API.Model.Common.Enums.Activities
         PUBLIC,
         PRIVATE
     }
+
+    public enum DistanceUnit
+    {
+        Steps,
+        Miles,
+        Kilometers
+    }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Fitbit.API.Model.Common.Enums.Activities;
 
 namespace Fitbit.API.Model.Activities
 {
@@ -62,12 +63,10 @@ namespace Fitbit.API.Model.Activities
 
         [JsonConverter(typeof(StringEnumConverter))]
         public DistanceUnit distanceUnit { get; set; }
+    }
 
-       public enum DistanceUnit
-       {
-           Steps,
-           Miles,
-           Kilometers
-       }
+    public class PostActivityResponse
+    {
+        public ActivityLog activityLog { get; set; }
     }
 }

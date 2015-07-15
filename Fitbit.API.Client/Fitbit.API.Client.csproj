@@ -39,6 +39,7 @@
     <Compile Include="ActivityClient.cs" />
     <Compile Include="FitbitClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SleepClient.cs" />
     <Compile Include="UserClient.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -103,6 +103,27 @@ namespace Fitbit.API.Client
         {
             Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", bearerToken);
         }
+
+        public string SerializeToQueryString<T>(T item)
+        {
+            string json = JsonConvert.SerializeObject(item, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            Dictionary<string, string> dict = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+            string query = "";
+
+            bool first = true;
+            foreach (string key in dict.Keys)
+            {
+                if (!first)
+                    query += "&";
+
+                query += key + "=" + dict[key];
+
+                first = false;
+            }
+
+            return query;
+        }
     }
 
     public class BaseClient
@@ -202,6 +223,19 @@ namespace Fitbit.API.Client
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        protected async Task DeleteAsync(string query)
+        {
+            try
+            {
+                var result = await Client.DeleteAsync(query).ConfigureAwait(false);
+                result.EnsureSuccessStatusCode();
+            }
+            catch 
+            {
+                throw;
             }
         }
     }
